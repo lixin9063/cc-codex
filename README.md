@@ -59,10 +59,15 @@ codex exec --help
 至少要保证下面命令能跑通：
 
 ```bash
-codex exec --json "Reply with exactly OK"
+cd /path/to/any/git/repo
+codex exec --json --skip-git-repo-check "Reply with exactly OK"
 ```
 
-如果这一步不通，这个仓库也不会通。
+说明：
+
+- `codex exec` 默认要求你在一个受信任的 git 目录里运行
+- 如果你只是做连通性自检，直接加上 `--skip-git-repo-check` 最省事
+- 如果这一步不通，这个仓库也不会通
 
 ### 4. `~/.codex/config.toml` 已配置好模型提供方
 
@@ -89,6 +94,12 @@ cd cc-codex
 ```bash
 bun install
 ```
+
+注意：
+
+- 第一次运行前必须先执行一次 `bun install`
+- 如果你删除仓库后重新 `git clone`，也必须重新执行一次 `bun install`
+- 不建议在没装依赖的情况下直接运行 `cc-codex`
 
 ### 3. 安装一键启动命令
 
