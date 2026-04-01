@@ -37,6 +37,9 @@
   "scripts": {
     "build": "bun run build.ts",
     "dev": "bun run src/entrypoints/cli.tsx",
+    "codex-dev": "PATH=\"$HOME/.bun/bin:$PATH\" CLAUDE_CODE_USE_CODEX_ENGINE=1 CLAUDE_CODE_CODEX_MODEL=gpt-5.4 bun run src/entrypoints/cli.tsx",
+    "codex-dev-bypass": "PATH=\"$HOME/.bun/bin:$PATH\" CLAUDE_CODE_USE_CODEX_ENGINE=1 CLAUDE_CODE_CODEX_MODEL=gpt-5.4 bun run src/entrypoints/cli.tsx --dangerously-skip-permissions",
+    "codex-install-launchers": "bash scripts/install-codex-launchers.sh",
     "prepublishOnly": "bun run build",
     "lint": "biome lint src/",
     "lint:fix": "biome lint --fix src/",

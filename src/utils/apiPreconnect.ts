@@ -24,6 +24,7 @@
  */
 
 import { getOauthConfig } from '../constants/oauth.js'
+import { isCodexEngineEnabled } from './codex.js'
 import { isEnvTruthy } from './envUtils.js'
 
 let fired = false
@@ -31,6 +32,10 @@ let fired = false
 export function preconnectAnthropicApi(): void {
   if (fired) return
   fired = true
+
+  if (isCodexEngineEnabled()) {
+    return
+  }
 
   // Skip if using a cloud provider — different endpoint + auth
   if (

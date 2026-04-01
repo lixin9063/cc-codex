@@ -74,7 +74,9 @@ import { errorMessage } from '../../utils/errors.js'
 import { computeFingerprintFromMessages } from '../../utils/fingerprint.js'
 import { captureAPIRequest, logError } from '../../utils/log.js'
 import {
+  createAssistantMessage,
   createAssistantAPIErrorMessage,
+  createSystemMessage,
   createUserMessage,
   ensureToolResultPairing,
   normalizeContentFromAPI,
@@ -201,6 +203,12 @@ import { insertBlockAfterToolResults } from '../../utils/contentArray.js'
 import { validateBoundedIntEnvVar } from '../../utils/envValidation.js'
 import { safeParseJSON } from '../../utils/json.js'
 import { getInferenceProfileBackingModel } from '../../utils/model/bedrock.js'
+import {
+  getCodexModel,
+  isCodexDebugEnabled,
+  isCodexEngineEnabled,
+  runCodexExec,
+} from '../../utils/codex.js'
 import {
   normalizeModelStringForAPI,
   parseUserSpecifiedModel,
@@ -1026,6 +1034,72 @@ async function* queryModel(
   StreamEvent | AssistantMessage | SystemAPIErrorMessage,
   void
 > {
+  if (isCodexEngineEnabled()) {
+    try {
+      if (isCodexDebugEnabled()) {
+        // biome-ignore lint/suspicious/noConsole: explicit debug evidence for codex bridge
+        console.error(
+          `[codex-debug] dispatch model=${getCodexModel()} cwd=${process.cwd()}`,
+        )
+        yield createSystemMessage(
+          `[codex-debug] dispatch model=${getCodexModel()} cwd=${process.cwd()}`,
+          'info',
+        )
+      }
+      const result = await runCodexExec({
+        systemPrompt,
+        messages,
+        abortSignal: signal,
+      })
+      if (isCodexDebugEnabled()) {
+        const usageLine = result.usage
+          ? ` input=${result.usage.input_tokens ?? 0} cached=${result.usage.cached_input_tokens ?? 0} output=${result.usage.output_tokens ?? 0}`
+          : ''
+        // biome-ignore lint/suspicious/noConsole: explicit debug evidence for codex bridge
+        console.error(
+          `[codex-debug] ok model=${getCodexModel()} thread=${result.threadId ?? 'unknown'} duration_ms=${result.durationMs}${usageLine}`,
+        )
+        // biome-ignore lint/suspicious/noConsole: explicit debug evidence for codex bridge
+        console.error(`[codex-debug] cmd=${result.command}`)
+        yield createSystemMessage(
+          `[codex-debug] ok model=${getCodexModel()} thread=${result.threadId ?? 'unknown'} duration_ms=${result.durationMs}${usageLine}\n[codex-debug] cmd=${result.command}`,
+          'info',
+        )
+      }
+      const assistant = createAssistantMessage({
+        content: result.text,
+        usage: result.usage as Record<string, unknown> | undefined,
+      })
+      assistant.requestId = result.threadId
+      if (assistant.message) {
+        assistant.message.model = getCodexModel()
+        assistant.message.stop_reason = 'end_turn'
+      }
+      yield assistant
+      return
+    } catch (error) {
+      if (signal.aborted || error instanceof APIUserAbortError) {
+        return
+      }
+      if (isCodexDebugEnabled()) {
+        // biome-ignore lint/suspicious/noConsole: explicit debug evidence for codex bridge
+        console.error(
+          `[codex-debug] error model=${getCodexModel()} message=${errorMessage(error)}`,
+        )
+        yield createSystemMessage(
+          `[codex-debug] error model=${getCodexModel()} message=${errorMessage(error)}`,
+          'warning',
+        )
+      }
+      yield createAssistantAPIErrorMessage({
+        content: `Codex engine error: ${errorMessage(error)}`,
+        apiError: 'unknown_error',
+        error: 'unknown_error',
+      })
+      return
+    }
+  }
+
   // Check cheap conditions first — the off-switch await blocks on GrowthBook
   // init (~10ms). For non-Opus models (haiku, sonnet) this skips the await
   // entirely. Subscribers don't hit this path at all.

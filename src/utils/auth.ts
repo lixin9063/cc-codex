@@ -59,6 +59,7 @@ import { execSyncWithDefaults_DEPRECATED } from './execFileNoThrow.js'
 import * as lockfile from './lockfile.js'
 import { logError } from './log.js'
 import { memoizeWithTTLAsync } from './memoize.js'
+import { isCodexEngineEnabled } from './codex.js'
 import { getSecureStorage } from './secureStorage/index.js'
 import {
   clearLegacyApiKeyPrefetch,
@@ -98,6 +99,8 @@ function isManagedOAuthContext(): boolean {
 /** Whether we are supporting direct 1P auth. */
 // this code is closely related to getAuthTokenSource
 export function isAnthropicAuthEnabled(): boolean {
+  if (isCodexEngineEnabled()) return false
+
   // --bare: API-key-only, never OAuth.
   if (isBareMode()) return false
 

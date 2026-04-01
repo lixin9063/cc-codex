@@ -114,9 +114,9 @@ export type ThemeSetting = (typeof THEME_SETTINGS)[number]
  */
 const lightTheme: Theme = {
   autoAccept: 'rgb(135,0,255)', // Electric violet
-  bashBorder: 'rgb(255,0,135)', // Vibrant pink
-  claude: 'rgb(215,119,87)', // Claude orange
-  claudeShimmer: 'rgb(245,149,117)', // Lighter claude orange for shimmer effect
+  bashBorder: 'rgb(87,105,247)', // Brand blue
+  claude: 'rgb(87,105,247)', // Brand blue
+  claudeShimmer: 'rgb(117,135,255)', // Lighter brand blue for shimmer effect
   claudeBlue_FOR_SYSTEM_SPINNER: 'rgb(87,105,247)', // Medium blue for system spinner
   claudeBlueShimmer_FOR_SYSTEM_SPINNER: 'rgb(117,135,255)', // Lighter blue for system spinner shimmer
   permission: 'rgb(87,105,247)', // Medium blue
@@ -154,11 +154,11 @@ const lightTheme: Theme = {
   pink_FOR_SUBAGENTS_ONLY: 'rgb(219,39,119)', // Pink 600
   cyan_FOR_SUBAGENTS_ONLY: 'rgb(8,145,178)', // Cyan 600
   // Grove colors
-  professionalBlue: 'rgb(106,155,204)',
+  professionalBlue: 'rgb(87,135,255)',
   // Chrome colors
   chromeYellow: 'rgb(251,188,4)', // Chrome yellow
   // TUI V2 colors
-  clawd_body: 'rgb(215,119,87)',
+  clawd_body: 'rgb(87,105,247)',
   clawd_background: 'rgb(0,0,0)',
   userMessageBackground: 'rgb(240, 240, 240)', // Slightly darker grey for optimal contrast
   userMessageBackgroundHover: 'rgb(252, 252, 252)', // ≥250 to quantize distinct from base at 256-color level
@@ -173,7 +173,7 @@ const lightTheme: Theme = {
   fastModeShimmer: 'rgb(255,150,50)', // Lighter orange for shimmer
   // Brief/assistant mode
   briefLabelYou: 'rgb(37,99,235)', // Blue
-  briefLabelClaude: 'rgb(215,119,87)', // Brand orange
+  briefLabelClaude: 'rgb(87,105,247)', // Brand blue
   rainbow_red: 'rgb(235,95,87)',
   rainbow_orange: 'rgb(245,139,87)',
   rainbow_yellow: 'rgb(250,195,95)',
@@ -196,9 +196,9 @@ const lightTheme: Theme = {
  */
 const lightAnsiTheme: Theme = {
   autoAccept: 'ansi:magenta',
-  bashBorder: 'ansi:magenta',
-  claude: 'ansi:redBright',
-  claudeShimmer: 'ansi:yellowBright',
+  bashBorder: 'ansi:blue',
+  claude: 'ansi:blueBright',
+  claudeShimmer: 'ansi:cyanBright',
   claudeBlue_FOR_SYSTEM_SPINNER: 'ansi:blue',
   claudeBlueShimmer_FOR_SYSTEM_SPINNER: 'ansi:blueBright',
   permission: 'ansi:blue',
@@ -240,7 +240,7 @@ const lightAnsiTheme: Theme = {
   // Chrome colors
   chromeYellow: 'ansi:yellow', // Chrome yellow
   // TUI V2 colors
-  clawd_body: 'ansi:redBright',
+  clawd_body: 'ansi:blueBright',
   clawd_background: 'ansi:black',
   userMessageBackground: 'ansi:white',
   userMessageBackgroundHover: 'ansi:whiteBright',
@@ -277,9 +277,9 @@ const lightAnsiTheme: Theme = {
  */
 const darkAnsiTheme: Theme = {
   autoAccept: 'ansi:magentaBright',
-  bashBorder: 'ansi:magentaBright',
-  claude: 'ansi:redBright',
-  claudeShimmer: 'ansi:yellowBright',
+  bashBorder: 'ansi:blueBright',
+  claude: 'ansi:blueBright',
+  claudeShimmer: 'ansi:cyanBright',
   claudeBlue_FOR_SYSTEM_SPINNER: 'ansi:blueBright',
   claudeBlueShimmer_FOR_SYSTEM_SPINNER: 'ansi:blueBright',
   permission: 'ansi:blueBright',
@@ -321,7 +321,7 @@ const darkAnsiTheme: Theme = {
   // Chrome colors
   chromeYellow: 'ansi:yellowBright', // Chrome yellow
   // TUI V2 colors
-  clawd_body: 'ansi:redBright',
+  clawd_body: 'ansi:blueBright',
   clawd_background: 'ansi:black',
   userMessageBackground: 'ansi:blackBright',
   userMessageBackgroundHover: 'ansi:white',
@@ -358,9 +358,9 @@ const darkAnsiTheme: Theme = {
  */
 const lightDaltonizedTheme: Theme = {
   autoAccept: 'rgb(135,0,255)', // Electric violet
-  bashBorder: 'rgb(0,102,204)', // Blue instead of pink
-  claude: 'rgb(255,153,51)', // Orange adjusted for deuteranopia
-  claudeShimmer: 'rgb(255,183,101)', // Lighter orange for shimmer effect
+  bashBorder: 'rgb(51,102,255)', // Bright blue
+  claude: 'rgb(51,102,255)', // Bright blue
+  claudeShimmer: 'rgb(101,152,255)', // Lighter blue for shimmer effect
   claudeBlue_FOR_SYSTEM_SPINNER: 'rgb(51,102,255)', // Bright blue for system spinner
   claudeBlueShimmer_FOR_SYSTEM_SPINNER: 'rgb(101,152,255)', // Lighter bright blue for system spinner shimmer
   permission: 'rgb(51,102,255)', // Bright blue
@@ -398,11 +398,11 @@ const lightDaltonizedTheme: Theme = {
   pink_FOR_SUBAGENTS_ONLY: 'rgb(255,102,178)', // Adjusted pink
   cyan_FOR_SUBAGENTS_ONLY: 'rgb(0,178,178)', // Adjusted cyan
   // Grove colors
-  professionalBlue: 'rgb(106,155,204)',
+  professionalBlue: 'rgb(87,135,255)',
   // Chrome colors
   chromeYellow: 'rgb(251,188,4)', // Chrome yellow
   // TUI V2 colors
-  clawd_body: 'rgb(215,119,87)',
+  clawd_body: 'rgb(51,102,255)',
   clawd_background: 'rgb(0,0,0)',
   userMessageBackground: 'rgb(220, 220, 220)', // Slightly darker grey for optimal contrast
   userMessageBackgroundHover: 'rgb(232, 232, 232)', // ≥230 to quantize distinct from base at 256-color level
@@ -439,9 +439,9 @@ const lightDaltonizedTheme: Theme = {
  */
 const darkTheme: Theme = {
   autoAccept: 'rgb(175,135,255)', // Electric violet
-  bashBorder: 'rgb(253,93,177)', // Bright pink
-  claude: 'rgb(215,119,87)', // Claude orange
-  claudeShimmer: 'rgb(235,159,127)', // Lighter claude orange for shimmer effect
+  bashBorder: 'rgb(147,165,255)', // Brand blue
+  claude: 'rgb(147,165,255)', // Brand blue
+  claudeShimmer: 'rgb(177,195,255)', // Lighter brand blue for shimmer effect
   claudeBlue_FOR_SYSTEM_SPINNER: 'rgb(147,165,255)', // Blue for system spinner
   claudeBlueShimmer_FOR_SYSTEM_SPINNER: 'rgb(177,195,255)', // Lighter blue for system spinner shimmer
   permission: 'rgb(177,185,249)', // Light blue-purple
@@ -479,11 +479,11 @@ const darkTheme: Theme = {
   pink_FOR_SUBAGENTS_ONLY: 'rgb(219,39,119)', // Pink 600
   cyan_FOR_SUBAGENTS_ONLY: 'rgb(8,145,178)', // Cyan 600
   // Grove colors
-  professionalBlue: 'rgb(106,155,204)',
+  professionalBlue: 'rgb(120,165,255)',
   // Chrome colors
   chromeYellow: 'rgb(251,188,4)', // Chrome yellow
   // TUI V2 colors
-  clawd_body: 'rgb(215,119,87)',
+  clawd_body: 'rgb(147,165,255)',
   clawd_background: 'rgb(0,0,0)',
   userMessageBackground: 'rgb(55, 55, 55)', // Lighter grey for better visual contrast
   userMessageBackgroundHover: 'rgb(70, 70, 70)',
@@ -520,9 +520,9 @@ const darkTheme: Theme = {
  */
 const darkDaltonizedTheme: Theme = {
   autoAccept: 'rgb(175,135,255)', // Electric violet
-  bashBorder: 'rgb(51,153,255)', // Bright blue
-  claude: 'rgb(255,153,51)', // Orange adjusted for deuteranopia
-  claudeShimmer: 'rgb(255,183,101)', // Lighter orange for shimmer effect
+  bashBorder: 'rgb(153,204,255)', // Bright blue
+  claude: 'rgb(153,204,255)', // Bright blue
+  claudeShimmer: 'rgb(183,224,255)', // Lighter blue for shimmer effect
   claudeBlue_FOR_SYSTEM_SPINNER: 'rgb(153,204,255)', // Light blue for system spinner
   claudeBlueShimmer_FOR_SYSTEM_SPINNER: 'rgb(183,224,255)', // Lighter blue for system spinner shimmer
   permission: 'rgb(153,204,255)', // Light blue
@@ -560,11 +560,11 @@ const darkDaltonizedTheme: Theme = {
   pink_FOR_SUBAGENTS_ONLY: 'rgb(255,153,204)', // Bright pink
   cyan_FOR_SUBAGENTS_ONLY: 'rgb(102,204,204)', // Bright cyan
   // Grove colors
-  professionalBlue: 'rgb(106,155,204)',
+  professionalBlue: 'rgb(120,165,255)',
   // Chrome colors
   chromeYellow: 'rgb(251,188,4)', // Chrome yellow
   // TUI V2 colors
-  clawd_body: 'rgb(215,119,87)',
+  clawd_body: 'rgb(153,204,255)',
   clawd_background: 'rgb(0,0,0)',
   userMessageBackground: 'rgb(55, 55, 55)', // Lighter grey for better visual contrast
   userMessageBackgroundHover: 'rgb(70, 70, 70)',

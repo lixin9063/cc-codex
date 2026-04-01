@@ -6,6 +6,7 @@ import { useTerminalSize } from '../../hooks/useTerminalSize.js';
 import { stringWidth } from '../../ink/stringWidth.js';
 import { Box, Text } from '../../ink.js';
 import { useAppState } from '../../state/AppState.js';
+import { getCodexModel, isCodexEngineEnabled } from '../../utils/codex.js';
 import { getEffortSuffix } from '../../utils/effort.js';
 import { truncate } from '../../utils/format.js';
 import { isFullscreenEnvEnabled } from '../../utils/fullscreen.js';
@@ -24,7 +25,7 @@ export function CondensedLogo() {
   const agent = useAppState(_temp);
   const effortValue = useAppState(_temp2);
   const model = useMainLoopModel();
-  const modelDisplayName = renderModelSetting(model);
+  const modelDisplayName = isCodexEngineEnabled() ? `Codex mode · ${getCodexModel()}` : renderModelSetting(model);
   const {
     version,
     cwd,
@@ -88,7 +89,7 @@ export function CondensedLogo() {
   }
   let t5;
   if ($[8] === Symbol.for("react.memo_cache_sentinel")) {
-    t5 = <Text bold={true}>Claude Code</Text>;
+    t5 = <Text bold={true}>{isCodexEngineEnabled() ? 'Claude Code · Codex' : 'Claude Code'}</Text>;
     $[8] = t5;
   } else {
     t5 = $[8];
