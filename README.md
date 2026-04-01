@@ -2,6 +2,10 @@
 
 这个仓库是一个可本地运行的 Claude Code 改造版。默认目标不是继续走 Anthropic API，而是把底层模型请求桥接到你本机已经可用的 `codex` CLI，再由 `codex` 使用你自己的 GPT / OpenAI 配置完成实际推理。
 
+仓库地址：
+
+- [https://github.com/lixin9063/cc-codex](https://github.com/lixin9063/cc-codex)
+
 适合的场景：
 
 - 你想保留 Claude Code 这套终端 UI / 交互体验
@@ -76,8 +80,8 @@ model_provider = "openai"
 ### 1. 获取代码
 
 ```bash
-git clone <your-repo-url>
-cd claude-code
+git clone https://github.com/lixin9063/cc-codex.git
+cd cc-codex
 ```
 
 ### 2. 安装依赖
@@ -113,14 +117,14 @@ export PATH="$HOME/.local/bin:$PATH"
 ### 方式 1：直接在项目目录运行
 
 ```bash
-cd /path/to/claude-code
+cd /path/to/cc-codex
 bun run codex-dev
 ```
 
 跳过权限确认：
 
 ```bash
-cd /path/to/claude-code
+cd /path/to/cc-codex
 bun run codex-dev-bypass
 ```
 
@@ -234,10 +238,10 @@ dist/
 
 ## 关键入口
 
-- CLI 入口：[`src/entrypoints/cli.tsx`](./src/entrypoints/cli.tsx)
-- Codex 桥接：[`src/utils/codex.ts`](./src/utils/codex.ts)
-- 主查询分支：[`src/services/api/claude.ts`](./src/services/api/claude.ts)
-- 全局 launcher 安装脚本：[`scripts/install-codex-launchers.sh`](./scripts/install-codex-launchers.sh)
+- CLI 入口：`src/entrypoints/cli.tsx`
+- Codex 桥接：`src/utils/codex.ts`
+- 主查询分支：`src/services/api/claude.ts`
+- 全局 launcher 安装脚本：`scripts/install-codex-launchers.sh`
 
 ## 故障排查
 
